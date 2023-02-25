@@ -63,9 +63,10 @@ inputs = {
   maintenance_window      = "Sat:14:00-Sat:15:00"
   copy_tags_to_snapshot   = true
 
-  db_name                = include.locals.name
+  # Initialize the database for the application to work
+  db_name                = "ips"
   # For real life environments, get these values from either AWS secrets or any other service like Hashicorp Vault
-  username               = "root"
+  username               = "app"
   password               = "Str0ngP4sS"
   create_random_password = false
 
