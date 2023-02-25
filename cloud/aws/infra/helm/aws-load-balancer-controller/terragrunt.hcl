@@ -24,6 +24,14 @@ ${base64decode(dependency.eks.outputs.cluster_certificate_authority_data)}
 EOF
 }
 
+dependency "vpc" {
+  config_path                             = "${get_terragrunt_dir()}/../vpc"
+  mock_outputs_allowed_terraform_commands = ["init", "validate", "plan", "terragrunt-info"]
+  mock_outputs = {
+    vpc_id          = "mocked-vpc-id"
+  }
+}
+
 # Using locally defined module to get EKS auth data
 dependency "eks_auth" {
   config_path = "${get_terragrunt_dir()}/../../eks-auth"
@@ -73,6 +81,7 @@ inputs = {
   eks_cluster_oidc_issuer_url = dependency.eks.outputs.cluster_oidc_issuer_url
 
   values = [templatefile("${get_terragrunt_dir()}/files/values.yaml", {
+    vpc_id       = dependency.vpc.outputs.vpc_id
     cluster_name = include.locals.name
     iam_role_arn = dependency.iam_role.outputs.iam_role_arn
   })]

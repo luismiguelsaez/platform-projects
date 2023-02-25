@@ -3,6 +3,7 @@ podLabels:
   infra/component: controller
 nodeSelector: {}
 affinity: {}
+vpcId: ${ vpc_id }
 clusterName: ${ cluster_name }
 serviceAccount:
   create: true
