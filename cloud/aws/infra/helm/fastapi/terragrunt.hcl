@@ -82,8 +82,9 @@ inputs = {
   # Using template, in case something needs to be customized in the values file
   values = [templatefile("${get_terragrunt_dir()}/files/values.yaml", {
     rds_endpoint = dependency.rds.outputs.db_instance_address,
-    rds_user     = dependency.rds.outputs.db_instance_username,
-    rds_pass     = dependency.rds.outputs.db_instance_password
+    rds_user     = include.locals.app_db_user,
+    rds_pass     = include.locals.app_db_pass,
+    rds_db       = include.locals.app_db_name,
     repo_url     = dependency.ecr.outputs.repository_url
   })]
 }

@@ -4,6 +4,10 @@ locals {
   az_num            = 3
   aws_region        = "eu-west-1"
   s3_backend_region = "eu-west-1"
+
+  app_db_name = "ips"
+  app_db_user = "app"
+  app_db_pass = "Str0ngP4sS"
 }
 
 generate "provider" {

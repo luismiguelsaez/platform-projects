@@ -64,10 +64,10 @@ inputs = {
   copy_tags_to_snapshot   = true
 
   # Initialize the database for the application to work
-  db_name                = "ips"
+  db_name                = include.locals.app_db_name
   # For real life environments, get these values from either AWS secrets or any other service like Hashicorp Vault
-  username               = "app"
-  password               = "Str0ngP4sS"
+  username               = include.locals.app_db_user
+  password               = include.locals.app_db_pass
   create_random_password = false
 
   create_db_option_group    = true

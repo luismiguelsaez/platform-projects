@@ -8,7 +8,7 @@ image:
 
 env:
   - name: DB_CONN
-    value: mysql+mysqlconnector://${rds_user}:${rds_pass}@${rds_endpoint}/ips
+    value: mysql+mysqlconnector://${rds_user}:${rds_pass}@${rds_endpoint}/${rds_db}
 
 ingress:
   enabled: true
