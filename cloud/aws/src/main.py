@@ -4,9 +4,18 @@ from os import environ as os_env
 from sqlalchemy import create_engine, insert, select, func
 from sqlalchemy.orm import sessionmaker
 from db.create import init as db_init
+import logging
+from sys import stdout as sys_stdout
 
 if 'DB_CONN' not in os_env:
   raise ValueError('Config variable \'DB_CONN\' not found')
+
+logger = logging.getLogger(__name__)
+handler = logging.StreamHandler(sys_stdout)
+logformat = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+handler.setFormatter(logformat)
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
 engine = create_engine(os_env['DB_CONN'], pool_size=1, pool_pre_ping=True)
 Session = sessionmaker(bind=engine)
@@ -15,7 +24,7 @@ session = Session()
 try:
   ips_table = db_init(engine)
 except Exception as db_exc:
-  print(f'Error while initializing the DB: {db_exc}')
+  logger.critical(f'Error while initializing the DB: {db_exc}')
   exit(1)
 
 app = FastAPI()
@@ -31,7 +40,8 @@ def insert_ip(request: Request):
     session.execute(stmt)
     session.commit()
   except Exception as insert_exc:
-    print(f'Error while inserting row: {insert_exc}')
+    logger.error(f'Error while inserting row: {insert_exc}')
+
   return {"client_ip": client_ip}
 
 @app.get("/list")
