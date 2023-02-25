@@ -5,6 +5,8 @@ locals {
   aws_region        = "eu-west-1"
   s3_backend_region = "eu-west-1"
 
+  # Database initialization variables
+  # Must be stored in a secrets engine like Vault or AWS secrets
   app_db_name = "ips"
   app_db_user = "app"
   app_db_pass = "Str0ngP4sS"
