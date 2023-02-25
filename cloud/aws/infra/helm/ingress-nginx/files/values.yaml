@@ -63,7 +63,7 @@ controller:
       service.beta.kubernetes.io/aws-load-balancer-healthcheck-timeout: '10'
       service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: '*'
   metrics:
-    enabled: true
+    enabled: false
     port: 10254
     serviceMonitor:
       enabled: true

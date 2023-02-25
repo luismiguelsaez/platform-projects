@@ -54,8 +54,8 @@ inputs = {
   chart         = "ingress-nginx"
   chart_version = "4.4.2"
 
-  create_namespace     = false
-  kubernetes_namespace = "kube-system"
+  create_namespace     = true
+  kubernetes_namespace = "ingress"
 
   atomic          = false
   cleanup_on_fail = false

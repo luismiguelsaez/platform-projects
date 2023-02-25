@@ -67,7 +67,7 @@ dependency "ecr" {
 
 inputs = {
   name  = "fastapi"
-  chart = "../../../helm/fastapi"
+  chart = "${get_terragrunt_dir()}/../../../helm/fastapi"
 
   create_namespace     = true
   kubernetes_namespace = "frontend"

@@ -1,7 +1,7 @@
 .PHONY: build test push
 
 build:
-	docker build -t fastapi:latest .
+	docker buildx build --platform linux/amd64 -t fastapi:latest .
 
 push:
 	docker login -u luismiguelsaez

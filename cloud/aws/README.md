@@ -78,7 +78,7 @@
 - Create image
 
 ```
-docker build -t fastapi:latest .
+docker buildx build --platform linux/amd64 -t fastapi:latest .
 docker login -u luismiguelsaez
 docker tag fastapi:latest docker.io/luismiguelsaez/fastapi:latest
 docker push docker.io/luismiguelsaez/fastapi:latest
@@ -118,6 +118,13 @@ terragrunt run-all destroy
 ```
 
 ## Troubleshooting
+
+## Connect to EKS cluster
+
+Add the cluster configuration to the `kubeconfig` file
+```bash
+aws --region eu-west-1 eks update-kubeconfig --name testing --alias testing
+```
 
 ### Check RDS connectivity
 

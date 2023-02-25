@@ -22,6 +22,8 @@ dependency "vpc" {
 ############################################################################################
 
 inputs = {
+  putin_khuylo: true
+
   cluster_name    = include.locals.name
   cluster_version = "1.25"
 
