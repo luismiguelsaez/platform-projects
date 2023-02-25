@@ -105,6 +105,7 @@ Expected esources creation order, based on dependencies
 
 ```bash
 cd infra
+terragrunt run-all init
 terragrunt run-all plan --terragrunt-ignore-external-dependencies -out terragrunt-plan.out
 terragrunt run-all apply --terragrunt-ignore-external-dependencies "terragrunt-plan.out"
 ```
