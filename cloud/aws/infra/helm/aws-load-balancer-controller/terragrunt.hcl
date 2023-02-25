@@ -25,7 +25,7 @@ EOF
 }
 
 dependency "vpc" {
-  config_path                             = "${get_terragrunt_dir()}/../vpc"
+  config_path                             = "${get_terragrunt_dir()}/../../vpc"
   mock_outputs_allowed_terraform_commands = ["init", "validate", "plan", "terragrunt-info"]
   mock_outputs = {
     vpc_id          = "mocked-vpc-id"
