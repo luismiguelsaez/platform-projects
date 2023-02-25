@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: docker.io/luismiguelsaez/fastapi
+  #repository: ${repo_url}
+  pullPolicy: Always
+  tag: latest
+
+env:
+  - name: DB_CONN
+    value: mysql+mysqlconnector://${rds_user}:${rds_pass}@${rds_endpoint}/ips
+
+ingress:
+  enabled: true
+  className: nginx-internet-facing
+  annotations: {}
+  hosts:
+    - host: fastapi.cluster.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
