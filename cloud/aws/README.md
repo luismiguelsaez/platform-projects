@@ -103,10 +103,17 @@ Expected esources creation order, based on dependencies
   - ecr
   - helm/*
 
-```
+```bash
 cd infra
 terragrunt run-all plan --terragrunt-ignore-external-dependencies -out terragrunt-plan.out
 terragrunt run-all apply --terragrunt-ignore-external-dependencies "terragrunt-plan.out"
+```
+
+- Destroy infrastructure
+
+```bash
+cd infra
+terragrunt run-all destroy
 ```
 
 ## Troubleshooting
