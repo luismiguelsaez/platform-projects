@@ -42,6 +42,8 @@ def insert_ip(request: Request):
   except Exception as insert_exc:
     logger.error(f'Error while inserting row: {insert_exc}')
 
+  logger.info(f'Inserted IP into DB [{client_ip}]')
+
   return {"client_ip": client_ip}
 
 @app.get("/list")

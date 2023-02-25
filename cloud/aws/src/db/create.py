@@ -1,6 +1,10 @@
 from sqlalchemy import MetaData, Table, Column, Integer, String
+from sqlalchemy_utils import database_exists, create_database
 
 def init(engine):
+  if not database_exists(engine.url):
+    create_database(engine.url)
+
   metadata_obj = MetaData()
 
   ip = Table(
