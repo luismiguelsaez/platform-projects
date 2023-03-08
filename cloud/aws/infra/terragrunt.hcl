@@ -2,7 +2,7 @@ locals {
   name              = "testing"
   vpc_cidr          = "172.24.0.0/22"
   az_num            = 3
-  aws_region        = "eu-west-1"
+  #aws_region        = "eu-west-1"
   s3_backend_region = "eu-west-1"
 
   # Database initialization variables
@@ -10,6 +10,11 @@ locals {
   app_db_name = "ips"
   app_db_user = "app"
   app_db_pass = "Str0ngP4sS"
+
+  # Load from folder structure files
+  region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
+
+  aws_region      = local.region_vars.locals.aws_region
 }
 
 generate "provider" {
