@@ -31,29 +31,9 @@ inputs = {
     REPOSITORY_POLICY_TEXT = templatefile("files/permissions-policy.hcl",
         { 
           # Add role name template for all node-groups in the different environments
-          principal_arns_ro = [
-                                # k8s clusters
-                                "arn:aws:iam::${include.locals.env_accountid_map["dev"]}:role/lok-k8s-main-*",
-                                "arn:aws:iam::${include.locals.env_accountid_map["stage"]}:role/lok-k8s-main-*",
-                                "arn:aws:iam::${include.locals.env_accountid_map["live"]}:role/lok-k8s-main-*",
-                                # lokalise-main applications ( app, api, wrk, nodeapp, okapi, shopify, langtool )
-                                "arn:aws:iam::${include.locals.env_accountid_map["stage"]}:role/lok-*-main",
-                                "arn:aws:iam::${include.locals.env_accountid_map["live"]}:role/lok-*-main",
-                                # bbl applications
-                                "arn:aws:iam::${include.locals.env_accountid_map["stage"]}:role/bbl-app-main",
-                                "arn:aws:iam::${include.locals.env_accountid_map["live"]}:role/bbl-app-main",
-                                # cteng applications
-                                "arn:aws:iam::${include.locals.env_accountid_map["stage"]}:role/lok-cteng-*",
-                                "arn:aws:iam::${include.locals.env_accountid_map["live"]}:role/lok-cteng-*",
-                                # cpe applications
-                                "arn:aws:iam::${include.locals.env_accountid_map["stage"]}:role/lok-cpe-*",
-                                "arn:aws:iam::${include.locals.env_accountid_map["live"]}:role/lok-cpe-*",
-                              ],
+          principal_arns_ro = [],
           # Add Jenkins build nodes role names
-          principal_arns_rw = [
-                                dependency.jenkins_build_iam_role.outputs.iam_role_arn,
-                                dependency.jenkins_build_arm_iam_role.outputs.iam_role_arn,
-                              ]
+          principal_arns_rw = []
         }
     )
   }
@@ -91,7 +71,7 @@ EOF
   allowed_triggers = {
     EventbridgeRule = {
       principal  = "events.amazonaws.com"
-      source_arn = "arn:aws:events:${include.locals.aws_region}:${include.locals.account_id}:rule/ecr-repo-autoprovision-rule"
+      source_arn = "arn:aws:events:*:*:rule/ecr-repo-autoprovision-rule"
     }
   }
 }
