@@ -25,7 +25,7 @@ inputs = {
   putin_khuylo: true
 
   cluster_name    = include.locals.name
-  cluster_version = "1.25"
+  cluster_version = "1.27"
 
   cluster_endpoint_private_access = true
   # Enabling public endpoint this time, but it must be limited to internal networks, from VPN for example
